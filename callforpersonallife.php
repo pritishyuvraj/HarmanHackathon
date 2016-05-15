@@ -8,8 +8,7 @@ echo "<hr>";
 
 <html>
 <body>
-<center><h1>Intelligent Routes</h1></center>
-<hr>
+<h1><center>Automated Home</center></h1>
 <form action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" name = "calling">
 CarID: <select name="id">
 <option value="Null">All</option>
@@ -17,11 +16,23 @@ CarID: <select name="id">
 </select>
 Time: <select name="time">
 <option value="Null">All</option>
-<option value="0-4">12am - 4am</option>
-<option value="4-9">4am - 9pm</option>
-<option value="9-18">9am - 6pm</option>
-<option value="18-20">6pm - 8pm</option>
-<option value="20-23.59">8pm - 12am</option>
+<option value="6">6am</option>
+<option value="7">7am</option>
+<option value="8">8am</option>
+<option value="9">9am</option>
+<option value="10">10am</option>
+<option value="11">11am</option>
+<option value="12">12am</option>
+<option value="13">1pm</option>
+<option value="14">2pm</option>
+<option value="15">3pm</option>
+<option value="16">4pm</option>
+<option value="17">5pm</option>
+<option value="18">6pm</option>
+<option value="19">7pm</option>
+<option value="20">8pm</option>
+<option value="20">8pm</option>
+<option value="21">9pm</option>
 </select>
 
 Day: <select name="day">
@@ -40,15 +51,6 @@ Date: <input type = "text" placeholder = "Null" >
 <input type = "hidden" name = "action" value = "call">
 <input type = "submit" name = "submit">
 </form>
-
-<hr>
-<form  action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" name = "predicting">
-Open New Window: <input type = "hidden" name = "action" value = "predict">
-<input type = "submit" name = "submit">
-</form>
-<hr>
-
-
 </body>
 </html>
 
@@ -131,8 +133,9 @@ switch($action){
 				else{
 					$day = "";
 				}
+
 				echo "Searching for ".$day;
-				$query = "SELECT * FROM Main_db WHERE Day like '%$day%' order by Date, time";
+				$query = "SELECT * FROM personal WHERE Day like '%$day%' order by Date, time";
 				
 				//To store to a file
 				/*
@@ -159,7 +162,7 @@ switch($action){
 					$j++;
 				}
 				//print_r($see);
-				$file = fopen("temp.csv", "w") or die("can't open file");
+				$file = fopen("temp2.csv", "w") or die("can't open file");
 				$str = "Hello world. It's a beautiful day.";
 				foreach($see as $line){
 				//fputcsv($file, explode(" ",$str));
@@ -168,13 +171,7 @@ switch($action){
 				}
 				fclose($file);
 				break;
-	case 'predict':	
-					//$output = shell_exec('sh index.sh');
-					if(isset($output)){
-						$link = "<script>window.open('predict.php')</script>";
-						$_SESSION["data"] = $output;
-						echo $link;
-					}
+				
 	default: echo "";
 				break;
 }
@@ -185,7 +182,7 @@ switch($action){
 <body><center>
 <table border="1" width=70%>
 <tr>
-<td colspan="3"><h1>Cars</h1></td>
+<td colspan="5"><h1>User Database</h1></td>
 </tr>
 
 <?php
@@ -201,14 +198,11 @@ switch($action){
 			}	
 
 //To print rules
-			$output = shell_exec('sh index.sh');
-			echo "<pre>$output</pre>";
-			//<hr>
-			
-			if(isset($output)){
-				$link = "<script>window.open('predict.php')</script>";
-				$_SESSION["data"] = $output;
-				echo $link;
+			$output = shell_exec('sh index_for_personal.sh');
+			if(isset($day)){
+				echo"<hr>";
+				echo"<h1><u>User Pattern on \"".$day."\"</u></h1>";
+				echo "<pre><h2>$output</h2></pre>";
+				echo "<hr>";
 			}
-			
 ?>

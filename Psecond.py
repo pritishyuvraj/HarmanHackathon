@@ -1,4 +1,4 @@
-a = open("temp.csv", "r")
+a = open("temp2.csv", "r")
 i = 0
 prev = 1
 d = {}
@@ -8,13 +8,13 @@ def changeOfDate(d, date):
 		text = ""
 		text2 = ""
 		for e in d[elements]:
-			text += (str(e)+ ",")
+			text += (str(e)+ " ")
 			text2 += (str(e)+ " ")
 		text = text.strip(',')
 		text += "\n"
 		text2 = text2.strip(',')
 		text2 += "\n"
-		with open("db.csv", "a") as myfile:
+		with open("db2.csv", "a") as myfile:
 			myfile.write(text)
 		#with open("db2.csv", "a") as myfile:
 		#	myfile.write(text2)	

@@ -123,7 +123,27 @@ def algorithm(result_list, vertex, a2D_matrix,support_value):
 			confidence = determine_confidence(result_list)
 			#print "Confidence level ", confidence
 			if confidence >= confidence_level:
-				print result_list
+				#print result_list
+				time = []
+				order = []
+				backwards = 0
+				settings = 0
+				for timinig in result_list:
+					get_time = timinig.split(';')
+					get_work = get_time[0]
+					get_time = int(get_time[1])
+					if get_time >= backwards:
+						backwards = get_time
+						get_work = str(get_work) + " @time: " + str(get_time)
+						order.append(get_work)
+						settings = 0
+					else:
+						settings = 1
+						break
+				if settings == 0:
+					#print order
+					for matter in order:
+						print matter
 			#else:
 				#print "Failed here ", confidence, result_list
 		del result_list[-1]

@@ -120,7 +120,8 @@ def printResults(items, rules):
     '''
     for rule, confidence in sorted(rules, key=lambda (rule, confidence): confidence):
         pre, post = rule
-        print "Rule: %s ==> %s , %.2f" % (str(pre), str(post), confidence)
+
+        print "From %s   To: %s with Confidence %.1f END" % (str(pre), str(post), confidence)
 
 
 def dataFromFile(fname):
